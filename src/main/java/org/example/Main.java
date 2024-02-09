@@ -1,18 +1,22 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
-    private static String[] numbers = {
+    private static final String[] numbers = {
             "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"
     };
 
     public static void main(String[] args) {
 
-        String örnekİşlem = "seven over nine plus two";
+        Scanner scanner = new Scanner(System.in);
 
-        String[] expressions = örnekİşlem.split(" ");
+        System.out.println("Please enter a calculation: ");
+        String calculationString = scanner.nextLine();
+
+        String[] expressions = calculationString.split(" ");
 
         for (int i = 0; i < expressions.length; i++) {
             if (expressions[i].equals("over")) {
@@ -119,8 +123,6 @@ public class Main {
         return total;
     }
     public static ArrayList<Object> fixArray(ArrayList<Object> array,int removeIndex,Double newElement) {
-
-        ArrayList<Object> fixedArray = new ArrayList<>();
 
         array.remove(removeIndex);
         array.remove(removeIndex);
