@@ -16,7 +16,7 @@ public class Main {
         System.out.println("Please enter a calculation: ");
         String calculationString = scanner.nextLine();
 
-        String[] expressions = calculationString.split(" ");
+        String[] expressions = calculationString.toLowerCase().split(" ");
 
         for (int i = 0; i < expressions.length; i++) {
             if (expressions[i].equals("over")) {
@@ -76,27 +76,32 @@ public class Main {
             for(int i = 2;i < mixedArray.size(); i++) {
 
                 char leftOperator = (char) mixedArray.get(i-1);
-
-                if(i+1 < mixedArray.size()) {
-                    char rightOperator = (char) mixedArray.get(i+1);
-
-                    if(leftOperator == '*' || leftOperator == '/') {
-
-                        double newNumber = calculate((double) mixedArray.get(i-2),(double) mixedArray.get(i),leftOperator);
-
-                        mixedArray = fixArray(mixedArray,i-2, newNumber);
-                        break;
-                    } else if(rightOperator == '*' || rightOperator == '/') {
-
-                        double newNumber = calculate((double) mixedArray.get(i), (double) mixedArray.get(i+2),rightOperator);
-                        mixedArray = fixArray(mixedArray,i,newNumber);
-                        break;
-                    }
-                }
-                if(leftOperator == '*' || leftOperator == '/') {
-                    double newNumber = calculate((double) mixedArray.get(i),(double) mixedArray.get(i+2),leftOperator);
+                if(mixedArray.size() == 3) {
+                    double newNumber = calculate((double) mixedArray.get(i-2),(double) mixedArray.get(i),leftOperator);
                     mixedArray = fixArray(mixedArray,i-2, newNumber);
                     break;
+                } else {
+                    if (i + 1 < mixedArray.size()) {
+                        char rightOperator = (char) mixedArray.get(i + 1);
+
+                        if (leftOperator == '*' || leftOperator == '/') {
+
+                            double newNumber = calculate((double) mixedArray.get(i - 2), (double) mixedArray.get(i), leftOperator);
+
+                            mixedArray = fixArray(mixedArray, i - 2, newNumber);
+                            break;
+                        } else if (rightOperator == '*' || rightOperator == '/') {
+
+                            double newNumber = calculate((double) mixedArray.get(i), (double) mixedArray.get(i + 2), rightOperator);
+                            mixedArray = fixArray(mixedArray, i, newNumber);
+                            break;
+                        }
+                    }
+                    if (leftOperator == '*' || leftOperator == '/') {
+                        double newNumber = calculate((double) mixedArray.get(i), (double) mixedArray.get(i + 2), leftOperator);
+                        mixedArray = fixArray(mixedArray, i - 2, newNumber);
+                        break;
+                    }
                 }
                 i++;
             }
